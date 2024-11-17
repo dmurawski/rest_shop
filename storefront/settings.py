@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # local apps
     "playground.apps.PlaygroundConfig",
     "store.apps.StoreConfig",
+    "store_custom.apps.StoreCustomConfig",
     "tags.apps.TagsConfig",
     "likes.apps.LikesConfig",
 ]
