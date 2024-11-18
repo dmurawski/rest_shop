@@ -6,15 +6,20 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 
-@api_view()
+@api_view(["GET", "POST"])
 def product_list(request):
-    queryset = Product.objects.select_related("collection").all()
-    serializer = ProductSerializer(
-        queryset,
-        many=True,
-        context={"request": request},
-    )
-    return Response(serializer.data)
+    if request.method == "GET":
+        queryset = Product.objects.select_related("collection").all()
+        serializer = ProductSerializer(
+            queryset,
+            many=True,
+            context={"request": request},
+        )
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = ProductSerializer(data=request.data)
+        # serializer.validated_data
+        return Response("ok")
 
 
 @api_view()
