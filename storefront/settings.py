@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # 3rd-apps
     "debug_toolbar",
+    "rest_framework",
     # local apps
     "playground.apps.PlaygroundConfig",
     "store.apps.StoreConfig",
