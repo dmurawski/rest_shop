@@ -1,10 +1,16 @@
+from django.db.models import Count
+from django.shortcuts import get_object_or_404
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Product, Collection
-from .serializers import ProductSerializer, CollectionSerializer
-from rest_framework import status
-from django.shortcuts import get_object_or_404
-from django.db.models import Count
+from rest_framework.views import APIView
+
+from .models import Collection, Product
+from .serializers import CollectionSerializer, ProductSerializer
+
+
+class ProductList(APIView):
+    pass
 
 
 @api_view(["GET", "POST"])
