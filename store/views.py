@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import ProductFilter
+from .pagination import DefaultPagination
 from .models import Collection, OrderItem, Product, Review
 from .serializers import (
     CollectionSerializer,
@@ -24,6 +25,7 @@ class ProductViewSet(ModelViewSet):
         OrderingFilter,
     ]
     filterset_class = ProductFilter
+    pagination_class = DefaultPagination
     search_fields = ["title", "description"]
     ordering_fields = ["unit_price", "last_update"]
 
