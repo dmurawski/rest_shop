@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # 3rd-apps
     "debug_toolbar",
     "rest_framework",
+    "django_filters",
     # local apps
     "playground.apps.PlaygroundConfig",
     "store.apps.StoreConfig",
