@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # 3rd-apps
     "debug_toolbar",
     "rest_framework",
+    "djoser",
     "django_filters",
     # local apps
     "playground.apps.PlaygroundConfig",
@@ -151,6 +152,13 @@ INTERNAL_IPS = [
 
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("JWT",),
 }
 
 AUTH_USER_MODEL = "core.User"
