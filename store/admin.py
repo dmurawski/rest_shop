@@ -19,11 +19,24 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=10)
 
 
+class ProductImageInLine(admin.TabularInline):
+    model = models.ProductImage
+    readonly_fields = ["thumbnail"]
+
+    def thumbnail(self, instance):
+        if instance.image.name != "":
+            return format_html(
+                f'<img src="{instance.image.url}" class="thumbnail"/>',
+            )
+        return ""
+
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     autocomplete_fields = ["collection"]
     prepopulated_fields = {"slug": ["title"]}
     actions = ["clear_inventory"]
+    inlines = [ProductImageInLine]
     list_display = [
         "title",
         "unit_price",
@@ -53,6 +66,11 @@ class ProductAdmin(admin.ModelAdmin):
             f"{updated_count} products were successfully updated.",
             messages.ERROR,
         )
+
+    class Media:
+        css = {
+            "all": ["store/styles.css"],
+        }
 
 
 @admin.register(models.Collection)
