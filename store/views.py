@@ -156,7 +156,7 @@ class CustomerViewSet(ModelViewSet):
         permission_classes=[IsAdminUser],
     )
     def me(self, request):
-        (customer, created) = Customer.objects.get_or_create(
+        customer = Customer.objects.get(
             user_id=request.user.id,
         )
         if request.method == "GET":
@@ -203,7 +203,7 @@ class OrderViewSet(ModelViewSet):
         if user.is_staff:
             return Order.objects.all()
 
-        (customer_id, created) = Customer.objects.only("id").get_or_create(
+        customer_id = Customer.objects.only("id").get(
             user_id=user.id,
         )
         return Order.objects.filter(customer_id=customer_id)
