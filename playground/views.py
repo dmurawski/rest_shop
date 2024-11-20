@@ -4,16 +4,23 @@ from django.db.models.functions import Concat
 from django.shortcuts import render
 
 from store.models import Collection, Customer, Order, OrderItem, Product
+from django.core.mail import send_mail, mail_admins, BadHeaderError
+from templated_mail.mail import BaseEmailMessage
 
 
 def say_hello(request):
-    qs2 = Customer.objects.annotate(
-        full_name=Concat("first_name", Value(" "), "last_name")
-    )
-    collection = Collection()
-    collection.title = "xd"
+    try:
+        message = BaseEmailMessage(
+            template_name="emails/hello.html",
+            context={
+                "name": "Damian",
+            },
+        )
+        message.send(["test@email.com"])
+    except BadHeaderError:
+        pass
     return render(
         request,
         "hello.html",
-        {"x": "x", "orders": qs2},
+        {"x": "x"},
     )
