@@ -2,3 +2,7 @@
 /media/
 /static/
 general.log
+__pycache__/
+*.pyc
+static/
+**/migrations/__pycache__/
