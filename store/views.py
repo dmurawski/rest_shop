@@ -147,15 +147,10 @@ class CustomerViewSet(ModelViewSet):
     def history(self, request, pk):
         return Response("ok")
 
-    def get_permissions(self):
-        if self.request.method == "GET":
-            return [AllowAny()]
-        return [IsAuthenticated()]
-
     @action(
         detail=False,
         methods=["GET", "PUT"],
-        permission_classes=[IsAdminUser],
+        permission_classes=[IsAuthenticated],
     )
     def me(self, request):
         customer = Customer.objects.get(
